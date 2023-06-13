@@ -16,7 +16,13 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Ustawienia domyślnego serwera Windows
-        run: Start-Process wuauclt.exe /detectnow /updatenow
+        run: |
+          Start-Process wuauclt.exe /detectnow
+          Start-Sleep -Seconds 10
+          Start-Process wuauclt.exe /resetauthorization /detectnow
+          Start-Sleep -Seconds 10
+          Start-Process wuauclt.exe /reportnow
+        
 
       - name: Skonfiguruj i zainstaluj potrzebne komponenty np. pip i PowerShell
         run: |
