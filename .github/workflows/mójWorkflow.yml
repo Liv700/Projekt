@@ -19,7 +19,7 @@ jobs:
         run: |
           Start-Process wuauclt.exe /detectnow
           Start-Sleep -Seconds 10
-          Start-Process wuauclt.exe /resetauthorization /detectnow
+          Start-Process wuauclt.exe /resetauthorization
           Start-Sleep -Seconds 10
           Start-Process wuauclt.exe /reportnow
         
