@@ -15,7 +15,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Ustawienia domyślnego serwera Windows
-        run: Get-WindowsUpdate -Install -AcceptAll
+        run: Start-Process wuauclt.exe /detectnow /updatenow
 
       - name: Skonfiguruj i zainstaluj potrzebne komponenty np. pip i PowerShell
         run: iex "& { $(irm https://aka.ms/install-powershell.ps1 -UseBasicP) }"
