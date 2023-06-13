@@ -65,6 +65,15 @@ def wczytaj_xml(file):
         print(f"Błąd podczas parsowania pliku '{file}'. Sprawdź poprawność składni XML.")
         sys.exit(1)
 
+def zapisz_xml(root, file):
+    try:
+        tree = ET.ElementTree(root)
+        tree.write(file, encoding='utf-8', xml_declaration=True)
+        print(f"Dane zapisane do pliku '{file}' w formacie XML.")
+    except:
+        print(f"Błąd podczas zapisu danych do pliku '{file}'.")
+
+
 file1, file2 = parsuj_argumenty()
 
 data1 = wczytaj_json(file1)
@@ -76,3 +85,5 @@ data2 = wczytaj_yaml(file2)
 zapis_yaml(data2, "output2.yml")
 
 root = wczytaj_xml("input.xml")
+
+zapisz_xml(root, "output3.xml")
