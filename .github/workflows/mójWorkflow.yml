@@ -25,9 +25,9 @@ jobs:
         
 
       - name: Skonfiguruj i zainstaluj potrzebne komponenty np. pip i PowerShell
-        run: |
-          iex (irm https://aka.ms/install-powershell.ps1 -UseBasicP)
-          iex (irm https://bootstrap.pypa.io/get-pip.py -UseBasicP)
+         run: |
+          iex "& { $(irm https://aka.ms/install-powershell.ps1 -UseBasicP) }"
+          iex "& { $(irm https://bootstrap.pypa.io/get-pip.py -UseBasicP) }"
 
 
       - name: Uruchom skrypt installResources.ps1
