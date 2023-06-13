@@ -1,0 +1,35 @@
+name: Mój workflow
+on:
+  push:
+    branches:
+      - master
+  schedule:
+    - cron: "0 0 * * 1"  
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout kodu
+        uses: actions/checkout@v2
+
+      - name: Ustawienia domyślnego serwera Windows
+        run: Get-WindowsUpdate -Install -AcceptAll
+
+      - name: Skonfiguruj i zainstaluj potrzebne komponenty np. pip i PowerShell
+        run: iex "& { $(irm https://aka.ms/install-powershell.ps1 -UseBasicP) }"
+        run: iex "& { $(irm https://bootstrap.pypa.io/get-pip.py -UseBasicP) }"
+
+       - name: Uruchom skrypt installResources.ps1
+        shell: pwsh
+        run: .\installResources.ps1
+     
+     - name: Budowanie pliku .exe
+        run: pyinstaller.exe --onefile --distpath . program.py
+
+      - name: Prześlij plik .exe
+        uses: actions/upload-artifact@v3
+        with:
+          name: Artefakcik
+          path: C:\Users\liwia\Desktop\Repozytorium\program.exe
