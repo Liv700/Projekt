@@ -25,7 +25,17 @@ def wczytaj_json(file):
         print(f"Błąd podczas parsowania pliku '{file}'. Sprawdź poprawność składni JSON.")
         sys.exit(1)
 
+def zapisz_json(data, file):
+    try:
+        with open(file, 'w') as f:
+            json.dump(data, f, indent=4)
+        print(f"Dane zapisane do pliku '{file}' w formacie JSON.")
+    except:
+        print(f"Błąd podczas zapisu danych do pliku '{file}'.")
+
 
 file1, file2 = parsuj_argumenty()
 
 data1 = wczytaj_json(file1)
+
+zapisz_json(data1, "output1.json")
